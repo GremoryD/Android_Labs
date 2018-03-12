@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
-
+public class MainActivity extends AppCompatActivity  {
 
 
     private EditText editText;
     private EditText editText2;
     private EditText editText4;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
         editText4 = (EditText) findViewById(R.id.editText4);
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("");
+                editText2.setText("");
+                editText4.setText("");
+            }
+        });
+
 
     }
 
@@ -44,41 +52,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    public void ClickNext(View v){
+        if(editText.getText().length()>0){
 
-    @Override
-    public void onClick(View view) {
-        if(view.getId()== R.id.button){
-            if(editText.getText().length()>0){
+        }else{
+            return;
+        }
+        if(editText2.getText().length()>0){
 
-            }else{
-                return;
-            }
-            if(editText2.getText().length()>0){
+        }else{
+            return;
+        }
+        if(isNumeric(editText4.getText().toString())){
 
-            }else{
-                return;
-            }
-            if(isNumeric(editText4.getText().toString())){
-
-            }else{
-                return;
-            }
-
-            if(Integer.parseInt(editText4.getText().toString())>0){
-
-            }else{
-                return;
-            }
-
-            Intent intent = new Intent(this, OcenaActivity.class);
-            startActivity(intent);
-
+        }else{
+            return;
         }
 
-        if(view.getId()==R.id.button2){
-            editText.setText("");
-            editText2.setText("");
-            editText4.setText("");
+        if(Integer.parseInt(editText4.getText().toString())>0){
+
+        }else{
+            return;
         }
+
+        Intent intent = new Intent(this, Main2Activity.class);
+        intent.putExtra(Main2Activity.NAME,editText.getText().toString());
+        intent.putExtra(Main2Activity.SURNAME,editText2.getText().toString());
+        intent.putExtra(Main2Activity.MARK,editText4.getText().toString());
+        startActivityForResult(intent,0);
     }
+
+
 }
